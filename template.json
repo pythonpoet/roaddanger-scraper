@@ -1,8 +1,10 @@
 {
     "headline":"string",
-    "date-time":"string",
+    "dateTime":"string",
     "alltext": "string",
     "sitename": "string",
     "url": "string",
-
+    "country": "string",
+    "version": "number",
+    "dataOrigin": "stremming"
 }

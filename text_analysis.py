@@ -32,7 +32,7 @@ for index, js in enumerate(json_files):
           def call_func():
             
             prompt_message = [
-              {
+                {
                 'role': 'user',
                 'content':  f"""Answer the question with '0' for fals and '1' for truth.
                                 Question: Is the city in the same coutry?

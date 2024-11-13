@@ -23,6 +23,6 @@ roaddanger_dehumanisation_question_list=[
     "Does the headline refere to all involved parties as humans, not transportation modes?",
     "Is the headline  subject of the sentence also human?",
     "Is headline written in active grammar?",
-    "Does the full article mentions specific physical and/or psychological consequences for all involved parties?"
+    "Does the full article mentions either physical or psychological consequences for all involved parties?)"
     "Does the full article places the crash in a larger pattern of crashes?"
 ]
