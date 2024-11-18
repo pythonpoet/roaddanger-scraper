@@ -5,7 +5,7 @@
  - Implement telegram bot (https://python-telegram-bot.org/)
  - Create mathematical model that automatically calculates human eval. 
 
-## Data aggrigation
+## Data aggregation
 We use multiple data sources: roaddanger.org db, lexisnexus, newsapi and dzen.ru
 Have a look at the file data_summary.ipynb to see what data we have for now.
 
