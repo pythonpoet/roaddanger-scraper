@@ -1,0 +1,7 @@
+supabase
+ollama
+crewai
+openai
+pycountry
+postgrest
+opencage
