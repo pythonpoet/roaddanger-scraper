@@ -322,7 +322,7 @@ if __name__ == "__main__":
     infox("Starting automated downloading Process")
     BATCH_SIZE = 250
     # TODO Look into Multi threading?
-    for valueToStart in range(500, N+1, BATCH_SIZE): # move in increments of batch size
+    for valueToStart in range(1, N+1, BATCH_SIZE): # move in increments of batch size
         infox("Running Batch", (valueToStart//BATCH_SIZE) + 1, "/", (N//BATCH_SIZE)+1)
         nexis = NexisWebScrapper(link, valueToStart, N, BATCH_SIZE, query)
         nexis.runEntireSingleBatch(valueToStart)
