@@ -1,5 +1,14 @@
 ### Dehumanising detectors
 
+
+## Verifiying the method
+ - Generall stability test. In a sample of articles, the same results have to be generated.
+  - Language bias, translate articles in the respective foreign language and check if the language has on the result.
+ - Compare with human eval from roaddanger
+
+
+
+
 ## TODO
  - Upload articles without location, see section roaddanger.org for details
  - Implement telegram bot (https://python-telegram-bot.org/)
