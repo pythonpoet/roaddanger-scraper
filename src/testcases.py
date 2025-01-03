@@ -35,7 +35,7 @@ deh_list=[
     "Does the article mentions either physical or psychological consequences for all involved parties?"
     "Does the article places the crash in a larger pattern of crashes?"
 ]
-prompts = {
+improved_prompts = {
     "prompt_all_parties": {
         "standard": [
             {
@@ -87,10 +87,15 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if all involved parties are referred to as humans (not transportation modes). Answer with '1' for yes or '0' for no.
-                    Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → Explanation: All parties (two drivers and a pedestrian) are referred to as humans. → Answer: 1
-                    Example 2: 'Car and Truck Collide on Highway, Causing Traffic Jam' → Explanation: The parties (car and truck) are referred to as transportation modes, not humans. → Answer: 0
-                    Headline: Motorcyclist and Truck Driver Injured in Highway Collision
+                """Determine if all parties in the following headline are referred to as humans (e.g., driver, pedestrian) and not as transportation modes (e.g., car, truck). 
+                Answer with '1' for yes or '0' for no.
+
+                Examples:
+                - 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → Explanation: All parties (two drivers and a pedestrian) are referred to as humans. → Answer: 1
+                - 'Car and Truck Collide on Highway, Causing Traffic Jam' → Explanation: The parties (car and truck) are referred to as transportation modes, not humans. → Answer: 0
+                - 'Cyclist and Motorcyclist Injured in Downtown Accident' → Explanation: All parties (cyclist and motorcyclist) are referred to as humans. → Answer: 1
+
+                Headline: Motorcyclist and Truck Driver Injured in Highway Collision
                 """
             },
             {
@@ -100,19 +105,29 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if all involved parties are referred to as humans (not transportation modes). Answer with '1' for yes or '0' for no.
-                   Headline: {Text}
+                """Determine if all parties in the following headline are referred to as humans (e.g., driver, pedestrian) and not as transportation modes (e.g., car, truck). 
+                Answer with '1' for yes or '0' for no.
+
+                Headline: {Text}
                 """
             },
         ],
+
         "explanation": [
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if all involved parties are referred to as humans (not transportation modes). Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → {"answer": 1, "explanation": "All parties (two drivers and a pedestrian) are referred to as humans."}
-                    Example 2: 'Car and Truck Collide on Highway, Causing Traffic Jam' → {"answer": 0, "explanation": "The parties (car and truck) are referred to as transportation modes."}
-                    Headline: Motorcyclist and Truck Driver Injured in Highway Collision
+                """Determine if all parties in the following headline are referred to as humans (e.g., driver, pedestrian) and not as transportation modes (e.g., car, truck). 
+                Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason why.
+
+                Examples:
+                - 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → {"answer": 1, "explanation": "All parties (two drivers and a pedestrian) are referred to as humans."}
+                - 'Car and Truck Collide on Highway, Causing Traffic Jam' → {"answer": 0, "explanation": "The parties (car and truck) are referred to as transportation modes."}
+                - 'Cyclist and Motorcyclist Injured in Downtown Accident' → {"answer": 1, "explanation": "All parties (cyclist and motorcyclist) are referred to as humans."}
+
+                Headline: Motorcyclist and Truck Driver Injured in Highway Collision
                 """
             },
             {
@@ -122,21 +137,33 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if all involved parties are referred to as humans (not transportation modes). Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Headline: {Text}
+                """Determine if all parties in the following headline are referred to as humans (e.g., driver, pedestrian) and not as transportation modes (e.g., car, truck). 
+                Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason why.
+
+                Headline: {Text}
                 """
             },
         ]
+
     },
     "prompt_subject": {
         "standard": [
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if the grammatical subject is a human. Answer with '1' for yes or '0' for no.
-                   Example 1: 'John is a teacher.' → Subject: John → Answer: 1
-                   Example 2: 'The car is fast.' → Subject: The car → Answer: 0
-                   Headline: Two Drivers Injured in Collision at Downtown Intersection
+                """Determine if the grammatical subject in the following headline refers to a human. 
+                Answer with '1' for yes or '0' for no.
+
+                Examples:
+                1. 'John is a teacher.' → Subject: John → Answer: 1
+                2. 'The car is fast.' → Subject: The car → Answer: 0
+                3. 'Cyclist Injured in Collision' → Subject: Cyclist → Answer: 1
+                4. 'Car Hits Pedestrian on Crosswalk' → Subject: Car → Answer: 0
+                5. 'Authorities Investigate Crash Site' → Subject: Authorities → Answer: 1
+
+                Headline: Two Drivers Injured in Collision at Downtown Intersection
                 """
             },
             {
@@ -146,8 +173,10 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if the grammatical subject is a human. Answer with '1' for yes or '0' for no.
-                   Headline: {Text}
+                """Determine if the grammatical subject in the following headline refers to a human. 
+                Answer with '1' for yes or '0' for no.
+
+                Headline: {Text}
                 """
             },
         ],
@@ -155,10 +184,19 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if the grammatical subject is a human. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'John is a teacher.' → {"answer": 1, "explanation": "The subject (John) is a human."}
-                    Example 2: 'The car is fast.' → {"answer": 0, "explanation": "The subject (the car) is not a human."}
-                    Headline: Two Drivers Injured in Collision at Downtown Intersection
+                """Determine if the grammatical subject in the following headline refers to a human. 
+                Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason why.
+
+                Examples:
+                1. 'John is a teacher.' → {"answer": 1, "explanation": "The subject (John) is a human."}
+                2. 'The car is fast.' → {"answer": 0, "explanation": "The subject (the car) is not a human."}
+                3. 'Cyclist Injured in Collision' → {"answer": 1, "explanation": "The subject (cyclist) is a human."}
+                4. 'Authorities Investigate Crash Site' → {"answer": 1, "explanation": "The subject (authorities) refers to a group of humans."}
+                5. 'Car Hits Pedestrian on Crosswalk' → {"answer": 0, "explanation": "The subject (car) is not a human."}
+
+                Headline: Two Drivers Injured in Collision at Downtown Intersection
                 """
             },
             {
@@ -168,21 +206,32 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if the grammatical subject is a human. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Headline: {Text}
+                """Determine if the grammatical subject in the following headline refers to a human. 
+                Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason why.
+
+                Headline: {Text}
                 """
             },
         ]
+
     },
     "prompt_active_grammar": {
         "standard": [
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if it is written in active grammar. Answer with '1' for yes or '0' for no.
-                    Example 1: 'Company Launches New Product Line' → Explanation: The headline is in active grammar because the subject (Company) performs the action (Launches). → Answer: 1
-                    Example 2: 'New Product Line Launched by Company' → Explanation: The headline is in passive grammar because the subject (New Product Line) receives the action. → Answer: 0
-                    Headline: City Council Approves New Budget Plan
+                """Determine if the following headline is written in active grammar. 
+                Answer with '1' for yes (active voice) or '0' for no (passive voice).
+
+                Examples:
+                1. 'Company Launches New Product Line' → Explanation: Active voice (subject performs the action). → Answer: 1
+                2. 'New Product Line Launched by Company' → Explanation: Passive voice (subject receives the action). → Answer: 0
+                3. 'President Signs New Law' → Explanation: Active voice (subject performs the action). → Answer: 1
+                4. 'New Law Signed by President' → Explanation: Passive voice (subject receives the action). → Answer: 0
+
+                Headline: City Council Approves New Budget Plan
                 """
             },
             {
@@ -192,43 +241,65 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if it is written in active grammar. Answer with '1' for yes or '0' for no.
-                   Headline: {Text}
+                """Determine if the following headline is written in active grammar. 
+                Answer with '1' for yes (active voice) or '0' for no (passive voice).
+
+                Headline: {Text}
                 """
             },
         ],
-        "explanation": [
+       "explanation": [
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if it is written in active grammar. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'Company Launches New Product Line' → {"answer": 1, "explanation": "The headline is in active grammar (subject performs the action)."}
-                    Example 2: 'New Product Line Launched by Company' → {"answer": 0, "explanation": "The headline is in passive grammar (subject receives the action)."}
-                    Headline: City Council Approves New Budget Plan
+                """Determine if the following headline is written in active grammar. 
+                Provide a JSON object with:
+                - 'answer': 1 for yes (active voice), 0 for no (passive voice)
+                - 'explanation': A short reason explaining the decision.
+
+                Examples:
+                1. 'Company Launches New Product Line' → {"answer": 1, "explanation": "Active voice (subject performs the action)."}
+                2. 'New Product Line Launched by Company' → {"answer": 0, "explanation": "Passive voice (subject receives the action)."}
+                3. 'Cyclist Hits Pedestrian in Park' → {"answer": 1, "explanation": "Active voice (subject performs the action)."}
+                4. 'Pedestrian Hit by Cyclist in Park' → {"answer": 0, "explanation": "Passive voice (subject receives the action)."}
+
+                Headline: City Council Approves New Budget Plan
                 """
             },
             {
                 'role': 'assistant',
-                'content': '{"answer": 1, "explanation": "The headline is in active grammar (subject performs the action)."}'  # Example response
+                'content': '{"answer": 1, "explanation": "Active voice (subject performs the action)."}'  # Example response
             },
             {
                 'role': 'user',
                 'content': 
-                """For the following headline, determine if it is written in active grammar. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Headline: {Text}
+                """Determine if the following headline is written in active grammar. 
+                Provide a JSON object with:
+                - 'answer': 1 for yes (active voice), 0 for no (passive voice)
+                - 'explanation': A short reason explaining the decision.
+
+                Headline: {Text}
                 """
             },
         ]
+
     },
     "prompt_consequences_mentioned": {
         "standard": [
             {
                 'role': 'user',
                 'content': 
-                """For the following article, determine if it mentions either physical or psychological consequences for all involved parties. Answer with '1' for yes or '0' for no.
-                    Example 1: 'Two drivers sustained minor injuries, and a pedestrian was treated for shock after the collision.' → Explanation: Physical and psychological consequences are mentioned for all parties (two drivers and a pedestrian). → Answer: 1
-                    Example 2: 'The accident caused significant damage to both vehicles.' → Explanation: No physical or psychological consequences are mentioned for the involved parties. → Answer: 0
-                    Article: The cyclist suffered a broken leg, and the driver was treated for anxiety following the crash.
+                """For the following article, determine if it mentions either physical (e.g., injuries, wounds) or psychological (e.g., shock, anxiety) consequences for all involved parties. Answer with '1' for yes or '0' for no.
+
+                Examples:
+                1. 'Two drivers sustained minor injuries, and a pedestrian was treated for shock after the collision.' 
+                → Explanation: Physical and psychological consequences are mentioned for all parties (two drivers and a pedestrian). → Answer: 1
+                2. 'The accident caused significant damage to both vehicles.'
+                → Explanation: No physical or psychological consequences are mentioned for the involved parties. → Answer: 0
+                3. 'The cyclist suffered a broken leg, but no information is provided about the driver.'
+                → Explanation: Consequences are not mentioned for all involved parties (only the cyclist is mentioned). → Answer: 0
+
+                Article: The cyclist suffered a broken leg, and the driver was treated for anxiety following the crash.
                 """
             },
             {
@@ -239,7 +310,8 @@ prompts = {
                 'role': 'user',
                 'content': 
                 """For the following article, determine if it mentions either physical or psychological consequences for all involved parties. Answer with '1' for yes or '0' for no.
-                   Article: {Text}
+
+                Article: {Text}
                 """
             },
         ],
@@ -247,10 +319,19 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following article, determine if it mentions either physical or psychological consequences for all involved parties. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'Two drivers sustained minor injuries, and a pedestrian was treated for shock after the collision.' → {"answer": 1, "explanation": "Physical and psychological consequences are mentioned for all parties."}
-                    Example 2: 'The accident caused significant damage to both vehicles.' → {"answer": 0, "explanation": "No consequences are mentioned for the involved parties."}
-                    Article: The cyclist suffered a broken leg, and the driver was treated for anxiety following the crash.
+                """For the following article, determine if it mentions either physical (e.g., injuries, wounds) or psychological (e.g., shock, anxiety) consequences for all involved parties. Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason explaining the decision.
+
+                Examples:
+                1. 'Two drivers sustained minor injuries, and a pedestrian was treated for shock after the collision.' 
+                → {"answer": 1, "explanation": "Physical and psychological consequences are mentioned for all parties."}
+                2. 'The accident caused significant damage to both vehicles.' 
+                → {"answer": 0, "explanation": "No consequences are mentioned for the involved parties."}
+                3. 'The cyclist suffered a broken leg, but no information is provided about the driver.' 
+                → {"answer": 0, "explanation": "Consequences are only mentioned for the cyclist, not all parties."}
+
+                Article: The cyclist suffered a broken leg, and the driver was treated for anxiety following the crash.
                 """
             },
             {
@@ -260,11 +341,15 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following article, determine if it mentions either physical or psychological consequences for all involved parties. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Article: {Text}
+                """For the following article, determine if it mentions either physical or psychological consequences for all involved parties. Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason explaining the decision.
+
+                Article: {Text}
                 """
             },
         ]
+
     },
     "prompt_larger_pattern": {
         "standard": [
@@ -272,9 +357,16 @@ prompts = {
                 'role': 'user',
                 'content': 
                 """For the following article, determine if it places the crash in a larger pattern of crashes. Answer with '1' for yes or '0' for no.
-                    Example 1: 'This is the third accident at this intersection in the past month, raising concerns about road safety.' → Explanation: The crash is placed in a larger pattern of crashes at the same intersection. → Answer: 1
-                    Example 2: 'The driver lost control of the vehicle, resulting in a collision with a tree.' → Explanation: The crash is described as an isolated incident with no reference to a larger pattern. → Answer: 0
-                    Article: This crash marks the fifth incident on this highway in the last two months, prompting calls for improved signage.
+
+                Examples:
+                1. 'This is the third accident at this intersection in the past month, raising concerns about road safety.' 
+                → Explanation: The crash is placed in a larger pattern of crashes at the same intersection. → Answer: 1
+                2. 'The driver lost control of the vehicle, resulting in a collision with a tree.' 
+                → Explanation: The crash is described as an isolated incident with no reference to a larger pattern. → Answer: 0
+                3. 'Reports indicate several crashes have occurred in the vicinity, but this one was due to a mechanical failure.' 
+                → Explanation: The crash is mentioned in the context of other crashes but is described as unrelated. → Answer: 0
+
+                Article: This crash marks the fifth incident on this highway in the last two months, prompting calls for improved signage.
                 """
             },
             {
@@ -285,7 +377,8 @@ prompts = {
                 'role': 'user',
                 'content': 
                 """For the following article, determine if it places the crash in a larger pattern of crashes. Answer with '1' for yes or '0' for no.
-                   Article: {Text}
+
+                Article: {Text}
                 """
             },
         ],
@@ -293,10 +386,19 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following article, determine if it places the crash in a larger pattern of crashes. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'This is the third accident at this intersection in the past month, raising concerns about road safety.' → {"answer": 1, "explanation": "The crash is placed in a larger pattern of crashes."}
-                    Example 2: 'The driver lost control of the vehicle, resulting in a collision with a tree.' → {"answer": 0, "explanation": "The crash is described as an isolated incident."}
-                    Article: This crash marks the fifth incident on this highway in the last two months, prompting calls for improved signage.
+                """For the following article, determine if it places the crash in a larger pattern of crashes. Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason explaining the decision.
+
+                Examples:
+                1. 'This is the third accident at this intersection in the past month, raising concerns about road safety.' 
+                → {"answer": 1, "explanation": "The crash is placed in a larger pattern of crashes at the same location."}
+                2. 'The driver lost control of the vehicle, resulting in a collision with a tree.' 
+                → {"answer": 0, "explanation": "The crash is described as an isolated incident with no reference to a larger pattern."}
+                3. 'Reports indicate several crashes have occurred in the vicinity, but this one was due to a mechanical failure.' 
+                → {"answer": 0, "explanation": "The crash is mentioned in the context of other crashes but is described as unrelated."}
+
+                Article: This crash marks the fifth incident on this highway in the last two months, prompting calls for improved signage.
                 """
             },
             {
@@ -306,11 +408,15 @@ prompts = {
             {
                 'role': 'user',
                 'content': 
-                """For the following article, determine if it places the crash in a larger pattern of crashes. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Article: {Text}
+                """For the following article, determine if it places the crash in a larger pattern of crashes. Provide a JSON object with:
+                - 'answer': 1 for yes, 0 for no
+                - 'explanation': A short reason explaining the decision.
+
+                Article: {Text}
                 """
             },
         ]
+
     }
 }
 proficiency_criteria = """
