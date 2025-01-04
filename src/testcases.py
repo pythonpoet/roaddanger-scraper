@@ -39,48 +39,78 @@ improved_prompts = {
     "prompt_all_parties": {
         "standard": [
             {
-                'role': 'user',
-                'content': 
-                """For the following headline, determine if all parties that were involved in the accident are mentioned. Answer with '1' for yes or '0' for no.
-                    Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → Explanation: All parties (two drivers and a pedestrian) are mentioned. → Answer: 1
-                    Example 2: 'Driver Hospitalized After Early Morning Crash' → Explanation: Only one party (the driver) is mentioned; other potential parties are not referenced. → Answer: 0
-                    Headline: Motorcyclist and Truck Driver Injured in Highway Collision
+                "role": "user",
+                "content": 
+                """For the following headline, determine if all parties involved in the accident are mentioned. 
+                Focus only on whether each involved party is mentioned in any way, regardless of how they are referred to (e.g., 'driver' or 'car'). 
+                Do not consider the specificity or level of detail in the reference. Answer with '1' for yes or '0' for no.
+
+                Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' 
+                → Explanation: All parties (two drivers and a pedestrian) are mentioned. → Answer: 1
+                
+                Example 2: 'Driver Hospitalized After Early Morning Crash' 
+                → Explanation: Only one party (the driver) is mentioned; other potential parties are not referenced. → Answer: 0
+
+                Example 3: 'Cyclist Dies After Collision with Car in Heusden' 
+                → Explanation: Both involved parties (cyclist and car) are mentioned, even though the car is not described in detail. → Answer: 1
+                
+                Headline: Motorcyclist and Truck Driver Injured in Highway Collision
                 """
             },
             {
-                'role': 'assistant',
-                'content': "1"  # Example response
+                "role": "assistant",
+                "content": "1"  # Example response
             },
             {
-                'role': 'user',
-                'content': 
-                """For the following headline, determine if all parties that were involved in the accident are mentioned. Answer with '1' for yes or '0' for no.
-                   Headline: {Text}
+                "role": "user",
+                "content": 
+                """For the following headline, determine if all parties involved in the accident are mentioned. 
+                Focus only on whether each involved party is mentioned in any way, regardless of how they are referred to. 
+                Answer with '1' for yes or '0' for no.
+
+                Headline: {Text}
                 """
-            },
+            }
         ],
         "explanation": [
             {
-                'role': 'user',
-                'content': 
-                """For the following headline, determine if all parties that were involved in the accident are mentioned. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                    Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' → {"answer": 1, "explanation": "All parties (two drivers and a pedestrian) are mentioned."}
-                    Example 2: 'Driver Hospitalized After Early Morning Crash' → {"answer": 0, "explanation": "Only one party (the driver) is mentioned."}
-                    Headline: Motorcyclist and Truck Driver Injured in Highway Collision
+                "role": "user",
+                "content": 
+                """For the following headline, determine if all parties involved in the accident are mentioned. 
+                Answer with a JSON object containing:
+                - 'answer' (1 for yes, 0 for no)
+                - 'explanation' (a short reason focused only on the presence of all parties, ignoring how they are referred to).
+
+                Example 1: 'Two Drivers and a Pedestrian Injured in Collision at Downtown Intersection' 
+                → {"answer": 1, "explanation": "All parties (two drivers and a pedestrian) are mentioned."}
+                
+                Example 2: 'Driver Hospitalized After Early Morning Crash' 
+                → {"answer": 0, "explanation": "Only one party (the driver) is mentioned."}
+                
+                Example 3: 'Cyclist Dies After Collision with Car in Heusden' 
+                → {"answer": 1, "explanation": "Both involved parties (cyclist and car) are mentioned."}
+                
+                Headline: Motorcyclist and Truck Driver Injured in Highway Collision
                 """
             },
             {
-                'role': 'assistant',
-                'content': '{"answer": 1, "explanation": "All parties (motorcyclist and truck driver) are mentioned."}'  # Example response
+                "role": "assistant",
+                "content": 
+                """{"answer": 1, "explanation": "All parties (motorcyclist and truck driver) are mentioned."}"""  # Example response
             },
             {
-                'role': 'user',
-                'content': 
-                """For the following headline, determine if all parties that were involved in the accident are mentioned. Answer with a JSON object containing 'answer' (1 for yes, 0 for no) and 'explanation' (a short reason).
-                   Headline: {Text}
+                "role": "user",
+                "content": 
+                """For the following headline, determine if all parties involved in the accident are mentioned. 
+                Answer with a JSON object containing:
+                - 'answer' (1 for yes, 0 for no)
+                - 'explanation' (a short reason focused only on the presence of all parties, ignoring how they are referred to).
+
+                Headline: {Text}
                 """
-            },
+            }
         ]
+
     },
     "prompt_human_reference": {
         "standard": [
