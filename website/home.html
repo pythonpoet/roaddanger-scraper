@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dehumanization Checker</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for(filename='style.css') }}"> 
+    <link rel="stylesheet" type="text/css" href="style.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -14,7 +14,27 @@
 
   <body>
 
+    <h1>roaddanger</h1>
+    <h2>dehumanization checker</h2>
 
+    <div class="intro">
+        <p>Check your article about road crashes for dehumanization.</p>
+        <p>Insert the text in the entry field below.</p>
+        <p>Dehumanization checker works in every language.</p>
+        <p>For more information visit <a href="https://www.roaddanger.org" target="_blank">roaddanger.org</a> website.</p>
+    </div>
+
+    <div class="entry-fields">
+    <form id="input_form">
+        <h3>Title of the article</h3>
+        <input type="text" required>
+
+        <h3>Full text</h3>
+        <textarea required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+    </div>
 
   </body>
 
