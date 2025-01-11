@@ -30,4 +30,52 @@
         <input type="text" id="title" name="title" required>
         
         <label for="full_text">Full Text</label>
-        <textarea id="full_text" name="full_text" ro
+        <textarea id="full_text" name="full_text" rows="10" required></textarea>
+        
+        <button type="submit">CHECK</button>
+      </form>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('input_form').addEventListener('submit', async (event) => {
+          event.preventDefault(); // Prevent form from refreshing the page
+      
+          // Get input values
+          const title = document.getElementById('title').value;
+          const full_text = document.getElementById('full_text').value;
+      
+          // Send request to backend
+          try {
+            const response = await fetch('/dehumanisation-test', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ title, full_text, explanation: true }), // Always include explanation
+            });
+      
+            const result = await response.json();
+      
+            // Display result
+            if (response.ok) {
+              document.getElementById('result').innerHTML = `
+                <h2>Result:</h2>
+                <p>Failure Code: ${result.failure_code}</p>
+                ${result.explanation ? `<p>Explanation: ${result.explanation}</p>` : ''}
+              `;
+            } else {
+              document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${result.error}</p>`;
+            }
+          } catch (error) {
+            document.getElementById('result').innerHTML = `<p style="color: red;">An unexpected error occurred: ${error.message}</p>`;
+          }
+        });
+      </script>
+      
+
+
+  </body>
+
+</html>
