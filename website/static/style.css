@@ -1,0 +1,97 @@
+
+
+* {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    }
+  
+  body {
+      background: #000;
+      margin-top: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-left: 5vw;
+      padding-right: 5vw;
+      padding-top: 5vh;
+      padding-bottom: 5vh;
+    }
+
+    h1 {
+        color: #FCF8DE;
+        font-size: 64px;
+        font-weight: 700;
+    }
+
+    h2 {
+        color: #DB4343;
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    h3 {
+        color: #FCF8DE;
+        font-size: clamp(20px, 2.5vw, 40px);
+        font-weight: 700;
+    }
+
+    .intro, .entry-fields {
+        margin-top: 3vw;
+    }
+
+    p {
+        color: #FCF8DE;
+        font-size: clamp(16px, 2.5vw, 30px); 
+        font-weight: 400;
+        line-height: clamp(24px, 5vw, 61px); 
+    }
+
+    a {
+        color: #DB4343;
+        text-decoration: none;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        color:#FCF8DE;
+        font-size: clamp(20px, 2.5vw, 40px); 
+        font-weight: 700;
+        gap: 2vh
+    }
+
+    form input[type="text"], 
+    form textarea {
+        border-radius: 14px;
+        border: 4px solid #DB4343;
+        background: #FCF8DE;
+        width: 50vw;
+        padding: 1vw;
+        color: #DB4343;
+        font-size: clamp(10px, 2.5vw, 24px); 
+        font-weight: 400;
+        margin-bottom: 2vh;
+        outline: none;
+    }
+
+    button {
+        border-radius: 12px;
+        background: #DB4343;
+        color: #FCF8DE;
+        width: 15vw;
+        font-size: clamp(15px, 2.5vw, 40px); 
+        font-weight: 700;
+        padding: 1vw;
+        border: none;
+    }
+
+    button:hover {
+        background: #ef8383;
+        color: #DB4343;
+    }
+
+    .result {
+        margin-top: 5vh;
+    }
+
+

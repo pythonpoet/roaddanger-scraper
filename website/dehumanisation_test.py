@@ -4,6 +4,8 @@ from testcases import improved_prompts
 from llm import makeCompute
 import copy
 from deep_translator import GoogleTranslator
+import re 
+import json
 
 def translate_text(text, src_lang='auto', dest_lang='en'):
     translator = GoogleTranslator(source=src_lang, target=dest_lang)
@@ -85,19 +87,20 @@ def format_message(prompt_message:list, Text:str):
         return msg
     except Exception as e:
         raise Exception(f"Failed to format the message: {e}")
-def dehumanisation_test(Title, Article, explanation=False, model=model, local=local):
+    
+def dehumanisation_test(Title, Article, explanation=False, model="deepseek/deepseek-chat", local=False):
     """
     Main function to test for dehumanisation.
     If explanation=True, returns a tuple (failure_code, explanation) if a test fails.
     If explanation=False, returns just the failure_code.
     """
     # Test 1: All parties mentioned
-    result = dehum_single_test(prompts["prompt_all_parties"], Text=Title, explanation=explanation, model=model, local=local)
+    result = dehum_single_test(improved_prompts["prompt_all_parties"], Text=Title, explanation=explanation, model=model, local=local)
     if result["answer"] == 0:
         return (0, result["explanation"]) if explanation else 0
    
     # Test 2: All parties referred to as humans
-    result = dehum_single_test(prompts["prompt_human_reference"], Text=Title,explanation=explanation, model=model, local=local)
+    result = dehum_single_test(improved_prompts["prompt_human_reference"], Text=Title,explanation=explanation, model=model, local=local)
     if result["answer"] == 0:
         return (1, result["explanation"]) if explanation else 1
 
