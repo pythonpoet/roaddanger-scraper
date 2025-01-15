@@ -6,16 +6,8 @@
   - Language bias, translate articles in the respective foreign language and check if the language has on the result.
  - Compare with human eval from roaddanger
 
-
-
-
-## TODO
- - Upload articles without location, see section roaddanger.org for details
- - Implement telegram bot (https://python-telegram-bot.org/)
- - Create mathematical model that automatically calculates human eval. 
-
 ## Data aggregation
-We use multiple data sources: roaddanger.org db, lexisnexus, newsapi and dzen.ru
+We use multiple data sources: roaddanger.org db, lexisnexus, newscatcherAPI
 Have a look at the file data_summary.ipynb to see what data we have for now.
 
 # Roaddanger.org
